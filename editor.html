@@ -69,6 +69,7 @@ data:text/html,
         z-index: 2;
         overflow-y: scroll;
     }
+
     .cm {
         position: fixed;
         z-index: 4;
@@ -78,14 +79,25 @@ data:text/html,
         left: 100px;
         width: 200px;
         height: 30px;
-        display: flex;
+        display: none;
         justify-content: center;
     }
-    .cm > div {
+
+    .cm>div {
         display: flex;
         cursor: pointer;
-        text-decoration: center;
+        text-align: center;
+        justify-content: center;
+        width: 100%;
         align-items: center;
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        font-size: 14px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .cm>div:hover {
+        background-color: rgb(47, 114, 229);
     }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
@@ -117,10 +129,12 @@ data:text/html,
     }
 </script>
 <script>
+    const d = (q) => document.querySelector(q)
     var lang = prompt('What language are you coding in?').trim()
-    var h = document.querySelector(".h")
-    var e = document.querySelector(".c")
-    var l = document.querySelector(".l")
+    var h = d(".h")
+    var e = d(".c")
+    var l = d(".l")
+    var cm = d(".cm")
     var wl
 
     navigator.platform.toString().toLowerCase().includes('mac') ? e.placeholder = 'META+S: OPEN PAGE OUTPUT | META+D: SAVE AS FILE' : e.placeholder = 'CTRL+S: OPEN PAGE OUTPUT | CTRL+D: SAVE AS FILE'
@@ -159,6 +173,18 @@ data:text/html,
         a.preventDefault()
     }
 
+    const hl = () => h.innerHTML = hljs.highlight(e.value, { language: lang }).value || e.value
+
+    const fd = () => {
+        try {
+            e.value = js_beautify(e.value, { indent_size: 4 })
+            hl()
+        } catch (err) {
+            alert("Failed to format...")
+            console.error(err)
+        }
+    }
+
     e.addEventListener("keydown", (a) => {
         if (a.key == "Tab") a.preventDefault()
 
@@ -178,6 +204,10 @@ data:text/html,
                 const w = window.open()
                 w.document.write(e.value)
                 wl = w
+            }
+            else if (a.ctrlKey && a.key == "p" || a.metaKey && a.key == "p") {
+                a.preventDefault()
+                fd()
             }
         } catch (err) { alert(err) }
 
@@ -211,34 +241,33 @@ data:text/html,
             case "]":
                 inb("]", a)
                 break
-            case "~":
-                // intelisense
-                a.preventDefault();
-                try {
-                    e.value = js_beautify(e.value, { indent_size: 4 })
-                } catch (err) {
-                    alert("Failed to format...")
-                    console.error(err)
-                }
-
         }
         setTimeout(() => {
-            var ta = a.target
             is(a.key)
 
             setTimeout(() => {
-                h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value
-                const st = ta.scrollTop
+                hl()
+                const st = e.scrollTop
                 l.scrollTop = st
                 h.scrollTop = st
-                h.scrollLeft = ta.scrollLeft
+                h.scrollLeft = e.scrollLeft
 
                 let ld = ""
-                let ln = ta.value.split("\n").length
+                let ln = e.value.split("\n").length
                 for (let i = 0; i < ln; i++) { ld += `${i + 1}<br>` }
                 l.innerHTML = ld
             })
 
         })
     })
+    e.addEventListener("contextmenu", (ev) => {
+        ev.preventDefault();
+        cm.style.top = ev.clientY;
+        cm.style.left = ev.clientX;
+        cm.style.display = "flex"
+    })
+    e.addEventListener("click", (ev) => {
+        cm.style.display = "none"
+    })
+    d(".fm").addEventListener("click", fd)
 </script>
