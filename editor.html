@@ -111,10 +111,10 @@ data:text/html,
         const ep = e.selectionEnd;
 
         e.value = e.value.substring(0, sp) + ch + e.value.substring(ep);
-        e.selectionStart = e.selectionEnd = sp + ch.length;
+        e.selectionStart = e.selectionEnd = sp + ch.length - 1;
         e.focus();
     };
-    
+
     e.addEventListener("keydown", (a) => {
         if (a.key == "Tab") a.preventDefault();
         setTimeout(() => {
@@ -122,8 +122,26 @@ data:text/html,
 
             switch (a.key) {
                 case "Tab":
-                    console.log("Tab")
                     ins('    ')
+                    break
+                case "{":
+                    ins("}")
+                    break
+                case "[":
+                    ins("]")
+                    break
+                case "(":
+                    ins(")")
+                    break
+                case "\"":
+                    ins("\"")
+                    break
+                case "\'":
+                    ins("\'")
+                    break
+                case "\`":
+                    ins("\`")
+                    break
             }
 
             h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value;
