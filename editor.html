@@ -1,15 +1,124 @@
 data:text/html,
 <title>NIMBUS WEB v0.1.2</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/ProgrammingTutorial@d32fdc9/docs/static/SyntaxHighlight.css">
+<link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/a-riceeater/ProgrammingTutorial@3a74bb6/docs/static/SyntaxHighlight.css">
 <style>
-    .a,.b{background-color:rgb(40, 44, 52)}.a{position:fixed;left:0;top:0;width:30px;height:100%;color:white;text-align:center;font-size:14px;padding-top:5px;box-sizing:border-box;line-height:1em;overflow-y:scroll;cursor:default;font-family:Menlo,Monaco,'Courier New',monospace;border-right:1px solid lightgray}.b,textarea{font-family:Menlo,Monaco,'Courier New',monospace;width:calc(100% - 30px);height:100%;position:fixed;left:30px;top:0;outline:0;font-size:14px;padding-top:2.5px;box-sizing:border-box;line-height:1em;border:none;padding-left:5px}.a::-webkit-scrollbar{display:none}textarea{background-color:transparent;color:transparent;z-index:2;caret-color:lightgray}textarea::selection{background-color:rgb(211,211,211,.35)}.b{color:lightgray;z-index:1}
+    /*    .a,.b{background-color:rgb(40, 44, 52)}.a{position:fixed;left:0;top:0;width:30px;height:100%;color:white;text-align:center;font-size:14px;padding-top:5px;box-sizing:border-box;line-height:1em;overflow-y:scroll;cursor:default;font-family:Menlo,Monaco,'Courier New',monospace;border-right:1px solid lightgray}.b,.c{font-family:Menlo,Monaco,'Courier New',monospace;width:calc(100% - 30px);height:100%;position:fixed;left:30px;top:0;outline:0;font-size:14px;padding-top:2.5px;box-sizing:border-box;line-height:1em;border:none;padding-left:5px}.a::-webkit-scrollbar{display:none}.c{background-color:transparent;color:transparent;z-index:2;caret-color:lightgray}.c::selection{background-color:rgb(211,211,211,.35)}.b{color:lightgray;z-index:1}*/
+    .l {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 100%;
+        background-color: rgb(40, 44, 52);
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        padding-top: 5px;
+        box-sizing: border-box;
+        line-height: 1em;
+        overflow-y: scroll;
+        cursor: default;
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        border-right: 1px solid lightgray;
+    }
+
+    .l::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .c {
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        width: calc(100% - 30px);
+        height: 100%;
+        position: fixed;
+        left: 30px;
+        top: 0;
+        outline: 0;
+        font-size: 14px;
+        padding-top: 2.5px;
+        box-sizing: border-box;
+        line-height: 1em;
+        background-color: transparent;
+        color: transparent;
+        border: none;
+        padding-left: 5px;
+        z-index: 3;
+        caret-color: lightgray;
+    }
+
+    .c::selection {
+        background-color: rgb(211, 211, 211, 0.35);
+    }
+
+    #h {
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        width: calc(100% - 30px);
+        height: 100%;
+        position: fixed;
+        left: 30px;
+        top: -0;
+        outline: 0;
+        font-size: 14px;
+        padding-top: 2.5px;
+        box-sizing: border-box;
+        line-height: 1em;
+        background-color: rgb(40, 44, 52);
+        color: lightgray;
+        border: none;
+        padding-left: 5px;
+        z-index: 2;
+    }
 </style>
-<script
-    src="https://cdn.jsdelivr.net/gh/a-riceeater/ProgrammingTutorial@d32fdc9/docs/static/SyntaxHighlight.js"></script>
-<div class="a"></div>
-<div class="b"></div>
-<textarea placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false"
-    autocomplete="false" autocapitalize="false"></textarea>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<div class="l"></div>
+<pre>
+        <div id="h"></div>
+    </pre>
+<textarea class="c" placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false"
+    autocomplete="off" autocapitalize="false"></textarea>
 <script>
-    var lan=prompt("What language are you coding in? (ext. or name)").trim(),a=[],be=document.querySelector(".b");const hi=new SyntaxHighlight(be);document.querySelector("textarea").addEventListener("keydown",e=>{if(e.ctrlKey&&"S"==e.key||e.metaKey&&"s"==e.key){e.preventDefault(),a.forEach(e=>e.close());var t=window.open();t.document.write(e.target.value),a.push(t)}setTimeout(()=>{var t=e.target.value.split("\n");let r="";t.forEach((e,t)=>{r+=`${0==t?"":"<br>"}${t+1}`});let l=document.querySelector(".a");l.innerHTML=r,l.scrollTop=l.scrollHeight,be.innerText=e.target.value,hi.highlight(lan)})});
+    
+   // var lan = prompt("What language are you coding in?").trim(), a = [], be = document.querySelector(".b"); const hi = new SyntaxHighlight(be); document.querySelector(".c").addEventListener("keydown", e => { if (e.ctrlKey && "S" == e.key || e.metaKey && "s" == e.key) { e.preventDefault(), a.forEach(e => e.close()); var t = window.open(); t.document.write(e.target.innerText), a.push(t) } "Tab" == e.key && (e.preventDefault(), insertAtCursor(e.target, "	"), be.innerText = e.target.innerText, hi.highlight(lan)), setTimeout(() => { var t = e.target.innerHTML.match(/<div/g) || ["a"]; console.log(t, t.length); let r = ""; t.forEach((e, t) => { r += `${0 == t ? "" : "<br>"}${t + 1}` }); let n = document.querySelector(".a"); n.innerHTML = r, n.scrollTop = n.scrollHeight, be.innerHTML = e.target.innerText, hi.highlight(lan) }) });
+
+    const lang = prompt('What language are you coding in?').trim();
+    const h = document.querySelector("#h");
+    const e = document.querySelector(".c");
+    const l = document.querySelector(".l");
+    h.addEventListener("scroll", (a) => {
+        const st = a.target.scrollTop;
+        e.scrollTop = st;
+        l.scrollTop = st;
+        e.scrollLeft = a.target.scrollLeft;
+    })
+    e.addEventListener("scroll", (a) => {
+        const st = a.target.scrollTop;
+        h.scrollTop = st;
+        l.scrollTop = st;
+        h.scrollLeft = a.target.scrollLeft;
+    })
+    l.addEventListener("scroll", (a) => {
+        const st = a.target.scrollTop;
+        h.scrollTop = st;
+        e.scrollTop = st;
+    })
+    e.addEventListener("keydown", (a) => {
+        setTimeout(() => {
+                var ta = a.target;
+                h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value;
+                const st = ta.scrollTop;
+                l.scrollTop = st;
+                h.scrollTop = st;
+                h.scrollLeft = ta.scrollLeft;
+
+                let ld = "";
+                let ln = ta.value.split("\n").length;
+                for (let i = 0; i < ln; i++) { ld += `${i+1}<br>` }
+                console.log(ld);
+                l.innerHTML = ld;
+        })
+    })
 </script>
