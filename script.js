@@ -3,12 +3,6 @@ const lang = prompt('What language are you coding in?').trim();
     const e = document.querySelector(".c");
     const l = document.querySelector(".l");
     var wl;
-    h.addEventListener("scroll", (a) => {
-        const st = a.target.scrollTop;
-        e.scrollTop = st;
-        l.scrollTop = st;
-        e.scrollLeft = a.target.scrollLeft;
-    })
     e.addEventListener("scroll", (a) => {
         const st = a.target.scrollTop;
         h.scrollTop = st;
