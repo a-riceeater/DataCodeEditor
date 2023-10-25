@@ -69,6 +69,24 @@ data:text/html,
         z-index: 2;
         overflow-y: scroll;
     }
+    .cm {
+        position: fixed;
+        z-index: 4;
+        background-color: black;
+        color: white;
+        top: 100px;
+        left: 100px;
+        width: 200px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+    }
+    .cm > div {
+        display: flex;
+        cursor: pointer;
+        text-decoration: center;
+        align-items: center;
+    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -79,7 +97,9 @@ data:text/html,
         <div class="h"></div>
     </pre>
 <textarea class="c" autofocus spellcheck="false" autocomplete="off" autocapitalize="false"></textarea>
-<div class="cm"></div>
+<div class="cm">
+    <div class="fm">Format Document</div>
+</div>
 <!-- Intelliscense, won't include in main but different file? -->
 <script>
     try {
