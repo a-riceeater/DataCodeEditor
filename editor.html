@@ -113,7 +113,9 @@ data:text/html,
 
         if (a.ctrlKey && a.shiftKey && a.key == "s" || a.metaKey && a.shiftKey && a.key == "s") {
             const ae = document.createElement("a");
-            ae.download = prompt("file name? (with ext.)");
+            var fn = prompt("file name? (with ext.)");
+            if (!fn) return
+            ae.download = fn
             ae.href=URL.createObjectURL(new Blob([e.value], {type:'text/plain'}));
             ae.click();
         }
