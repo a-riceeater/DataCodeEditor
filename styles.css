@@ -1,0 +1,66 @@
+    .l {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 30px;
+        height: 100%;
+        background-color: rgb(40, 44, 52);
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        padding-top: 5px;
+        box-sizing: border-box;
+        line-height: 1em;
+        overflow-y: scroll;
+        cursor: default;
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        border-right: 1px solid lightgray;
+    }
+
+    .l::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .c {
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        width: calc(100% - 30px);
+        height: 100%;
+        position: fixed;
+        left: 30px;
+        top: 0;
+        outline: 0;
+        font-size: 14px;
+        padding-top: 2.5px;
+        box-sizing: border-box;
+        line-height: 1em;
+        background-color: transparent;
+        color: transparent;
+        border: none;
+        padding-left: 5px;
+        z-index: 3;
+        caret-color: lightgray;
+    }
+
+    .c::selection {
+        background-color: rgb(211, 211, 211, 0.35);
+    }
+
+    #h {
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        width: calc(100% - 30px);
+        height: 100%;
+        position: fixed;
+        left: 30px;
+        top: -0;
+        outline: 0;
+        font-size: 14px;
+        padding-top: 2.5px;
+        box-sizing: border-box;
+        line-height: 1em;
+        background-color: rgb(40, 44, 52);
+        color: lightgray;
+        border: none;
+        padding-left: 5px;
+        z-index: 2;
+    }
