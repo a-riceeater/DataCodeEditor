@@ -21,7 +21,7 @@ Simply paste the code into your browser tab!
 
 ```html
 data:text/html,
-<title>NIMBUS WEB v0.1.2</title>
+<title>NIMBUS WEB v1.0.1</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/styles.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -39,7 +39,7 @@ data:text/html,
 
 ```html
 data:text/html,
-<title>NIMBUS WEB v0.1.2</title>
+<title>NIMBUS WEB v1.0.1</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <style>
