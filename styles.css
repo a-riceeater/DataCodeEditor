@@ -46,7 +46,7 @@
         background-color: rgb(211, 211, 211, 0.35);
     }
 
-    #h {
+    .h {
         font-family: Menlo, Monaco, 'Courier New', monospace;
         width: calc(100% - 30px);
         height: 100%;
