@@ -88,6 +88,7 @@ data:text/html,
     const h = document.querySelector("#h");
     const e = document.querySelector(".c");
     const l = document.querySelector(".l");
+    var wl;
     h.addEventListener("scroll", (a) => {
         const st = a.target.scrollTop;
         e.scrollTop = st;
@@ -126,10 +127,11 @@ data:text/html,
             ae.click();
         }
         else if (a.ctrlKey || a.metaKey && a.key == "s") {
-            console.log("Save")
             a.preventDefault();
+            if (wl) wl.close();
             const w = window.open();
             w.document.write(e.value);
+            wl = w;
         }
         
         setTimeout(() => {
