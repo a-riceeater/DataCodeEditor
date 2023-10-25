@@ -71,7 +71,7 @@ data:text/html,
         z-index: 2;
     }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
 <div class="l"></div>
@@ -81,8 +81,8 @@ data:text/html,
 <textarea class="c" placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false"
     autocomplete="off" autocapitalize="false"></textarea>
 <script>
-    
-   // var lan = prompt("What language are you coding in?").trim(), a = [], be = document.querySelector(".b"); const hi = new SyntaxHighlight(be); document.querySelector(".c").addEventListener("keydown", e => { if (e.ctrlKey && "S" == e.key || e.metaKey && "s" == e.key) { e.preventDefault(), a.forEach(e => e.close()); var t = window.open(); t.document.write(e.target.innerText), a.push(t) } "Tab" == e.key && (e.preventDefault(), insertAtCursor(e.target, "	"), be.innerText = e.target.innerText, hi.highlight(lan)), setTimeout(() => { var t = e.target.innerHTML.match(/<div/g) || ["a"]; console.log(t, t.length); let r = ""; t.forEach((e, t) => { r += `${0 == t ? "" : "<br>"}${t + 1}` }); let n = document.querySelector(".a"); n.innerHTML = r, n.scrollTop = n.scrollHeight, be.innerHTML = e.target.innerText, hi.highlight(lan) }) });
+
+    // var lan = prompt("What language are you coding in?").trim(), a = [], be = document.querySelector(".b"); const hi = new SyntaxHighlight(be); document.querySelector(".c").addEventListener("keydown", e => { if (e.ctrlKey && "S" == e.key || e.metaKey && "s" == e.key) { e.preventDefault(), a.forEach(e => e.close()); var t = window.open(); t.document.write(e.target.innerText), a.push(t) } "Tab" == e.key && (e.preventDefault(), insertAtCursor(e.target, "	"), be.innerText = e.target.innerText, hi.highlight(lan)), setTimeout(() => { var t = e.target.innerHTML.match(/<div/g) || ["a"]; console.log(t, t.length); let r = ""; t.forEach((e, t) => { r += `${0 == t ? "" : "<br>"}${t + 1}` }); let n = document.querySelector(".a"); n.innerHTML = r, n.scrollTop = n.scrollHeight, be.innerHTML = e.target.innerText, hi.highlight(lan) }) });
 
     const lang = prompt('What language are you coding in?').trim();
     const h = document.querySelector("#h");
@@ -105,20 +105,38 @@ data:text/html,
         h.scrollTop = st;
         e.scrollTop = st;
     })
-    e.addEventListener("keydown", (a) => {
-        setTimeout(() => {
-                var ta = a.target;
-                h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value;
-                const st = ta.scrollTop;
-                l.scrollTop = st;
-                h.scrollTop = st;
-                h.scrollLeft = ta.scrollLeft;
 
-                let ld = "";
-                let ln = ta.value.split("\n").length;
-                for (let i = 0; i < ln; i++) { ld += `${i+1}<br>` }
-                console.log(ld);
-                l.innerHTML = ld;
+    const ins = (ch) => {
+        const sp = e.selectionStart;
+        const ep = e.selectionEnd;
+
+        e.value = e.value.substring(0, sp) + ch + e.value.substring(ep);
+        e.selectionStart = e.selectionEnd = sp + ch.length;
+        e.focus();
+    };
+    
+    e.addEventListener("keydown", (a) => {
+        if (a.key == "Tab") a.preventDefault();
+        setTimeout(() => {
+            var ta = a.target;
+
+            switch (a.key) {
+                case "Tab":
+                    console.log("Tab")
+                    ins('    ')
+            }
+
+            h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value;
+            const st = ta.scrollTop;
+            l.scrollTop = st;
+            h.scrollTop = st;
+            h.scrollLeft = ta.scrollLeft;
+
+            let ld = "";
+            let ln = ta.value.split("\n").length;
+            for (let i = 0; i < ln; i++) { ld += `${i + 1}<br>` }
+            console.log(ld);
+            l.innerHTML = ld;
         })
     })
 </script>
