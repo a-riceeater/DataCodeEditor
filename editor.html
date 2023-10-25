@@ -111,13 +111,13 @@ data:text/html,
         if (a.key == "Tab") a.preventDefault();
 
 
-        if (a.ctrlKey || a.metaKey && a.shiftKey && a.key == "s") {
+        if (a.ctrlKey && a.shiftKey && a.key == "s" || a.metaKey && a.shiftKey && a.key == "s") {
             const ae = document.createElement("a");
             ae.download = prompt("file name? (with ext.)");
             ae.href=URL.createObjectURL(new Blob([e.value], {type:'text/plain'}));
             ae.click();
         }
-        else if (a.ctrlKey || a.metaKey && a.key == "s") {
+        else if (a.ctrlKey && a.key == "s" || a.metaKey && a.key == "s") {
             a.preventDefault();
             if (wl) wl.close();
             const w = window.open();
