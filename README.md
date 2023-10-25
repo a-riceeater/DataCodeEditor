@@ -10,7 +10,7 @@ A: Hex values require a `#`. However, in URLS, `#` signifies an HTML element, wh
 
 Simply paste the code into your browser tab!
 
-**Tiniest version**
+**Tiniest version** (no inline)
 ```html
 data:text/html,
 <title>NIMBUS WEB v0.1.2</title>
@@ -21,3 +21,4 @@ data:text/html,
 <pre><div class="h"></div></pre>
 <textarea class="c" placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false" autocomplete="off" autocapitalize="false"></textarea>
 <script src="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/script.js"></script>```
+
