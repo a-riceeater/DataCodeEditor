@@ -11,7 +11,13 @@ A: Hex values require a `#`. However, in URLS, `#` signifies an HTML element, wh
 
 Simply paste the code into your browser tab!
 
-**Tiniest version** (no inline)
+**Tiniest version**
+
+- No inline code
+- Faster load
+- Intellisense
+- Automatically updates when CDN updates
+- Requires more use of the internet
 
 ```html
 data:text/html,
@@ -26,6 +32,11 @@ data:text/html,
 ```
 
 **Mini version** (inline)
+
+- No IntelliSense
+- Requires manual updates (but you can update faster than CDN if you get repo update notifications)
+- Not as much internet use
+
 ```html
 data:text/html,
 <title>NIMBUS WEB v0.1.2</title>
