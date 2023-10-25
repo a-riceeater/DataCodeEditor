@@ -1,5 +1,5 @@
 data:text/html,
-<title>NIMBUS WEB v0.1.2</title>
+<title>NIMBUS WEB v1.0.1</title>
 
 <style>
     .l {
@@ -81,89 +81,114 @@ data:text/html,
     autocomplete="off" autocapitalize="false"></textarea>
 <script>
     const lang = prompt('What language are you coding in?').trim();
-    const h = document.querySelector(".h");
-    const e = document.querySelector(".c");
-    const l = document.querySelector(".l");
-    var wl;
+    const h = document.querySelector(".h")
+    const e = document.querySelector(".c")
+    const l = document.querySelector(".l")
+    var wl
 
     e.addEventListener("scroll", (a) => {
-        const st = a.target.scrollTop;
-        h.scrollTop = st;
-        l.scrollTop = st;
-        h.scrollLeft = a.target.scrollLeft;
+        const st = a.target.scrollTop
+        h.scrollTop = st
+        l.scrollTop = st
+        h.scrollLeft = a.target.scrollLeft
     })
     l.addEventListener("scroll", (a) => {
-        const st = a.target.scrollTop;
-        h.scrollTop = st;
-        e.scrollTop = st;
+        const st = a.target.scrollTop
+        h.scrollTop = st
+        e.scrollTop = st
     })
 
-    const ins = (ch) => {
-        const sp = e.selectionStart;
-        const ep = e.selectionEnd;
+    const ins = (ch, ev) => {
+        const sp = e.selectionStart
+        const ep = e.selectionEnd
 
-        e.value = e.value.substring(0, sp) + ch + e.value.substring(ep);
-        e.selectionStart = e.selectionEnd = sp + ch.length - 1;
-        e.focus();
-    };
+        if (e.value.charAt(sp) == ch) {
+            e.setSelectionRange(sp + 1, sp + 1)
+            ev.preventDefault()
+            return
+        }
+
+        e.value = e.value.substring(0, sp) + ch + e.value.substring(ep)
+        e.selectionStart = e.selectionEnd = sp + ch.length - 1
+        e.focus()
+    }
+
+    const inb = (ch, a) => {
+        var sp = e.selectionStart;
+        if (e.value.charAt(sp) != ch) return
+        e.setSelectionRange(sp + 1, sp + 1);
+        a.preventDefault()
+    }
 
     e.addEventListener("keydown", (a) => {
-        if (a.key == "Tab") a.preventDefault();
+        if (a.key == "Tab") a.preventDefault()
 
 
         if (a.ctrlKey && a.shiftKey && a.key == "s" || a.metaKey && a.shiftKey && a.key == "s") {
-            const ae = document.createElement("a");
-            var fn = prompt("file name? (with ext.)");
+            alert("dow")
+            const ae = document.createElement("a")
+            var fn = prompt("file name? (with ext.)")
             if (!fn) return
             ae.download = fn
-            ae.href=URL.createObjectURL(new Blob([e.value], {type:'text/plain'}));
-            ae.click();
+            ae.href=URL.createObjectURL(new Blob([e.value], {type:'text/plain'}))
+            ae.click()
         }
         else if (a.ctrlKey && a.key == "s" || a.metaKey && a.key == "s") {
-            a.preventDefault();
-            if (wl) wl.close();
-            const w = window.open();
-            w.document.write(e.value);
-            wl = w;
+            a.preventDefault()
+            if (wl) wl.close()
+            const w = window.open()
+            w.document.write(e.value)
+            wl = w
         }
-        
-        setTimeout(() => {
-            var ta = a.target;
 
-            switch (a.key) {
+        switch (a.key) {
                 case "Tab":
                     ins('    ')
                     break
                 case "{":
-                    ins("}")
+                    ins("}", a)
                     break
                 case "[":
-                    ins("]")
+                    ins("]", a)
                     break
                 case "(":
-                    ins(")")
+                    ins(")", a)
                     break
                 case "\"":
-                    ins("\"")
+                    ins("\"", a)
                     break
                 case "\'":
-                    ins("\'")
+                    ins("\'", a)
                     break
                 case "\`":
-                    ins("\`")
+                    ins("\`", a)
+                case ")":
+                    inb(")",a)
                     break
+                case "}":
+                    inb("}",a)
+                    break
+                case "]":
+                    inb("]", a)
+                    break
+                
             }
+        
+        setTimeout(() => {
+            var ta = a.target
 
-            h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value;
-            const st = ta.scrollTop;
-            l.scrollTop = st;
-            h.scrollTop = st;
-            h.scrollLeft = ta.scrollLeft;
+            h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value
+            const st = ta.scrollTop
+            l.scrollTop = st
+            h.scrollTop = st
+            h.scrollLeft = ta.scrollLeft
 
-            let ld = "";
-            let ln = ta.value.split("\n").length;
+            let ld = ""
+            let ln = ta.value.split("\n").length
             for (let i = 0; i < ln; i++) { ld += `${i + 1}<br>` }
-            l.innerHTML = ld;
+            l.innerHTML = ld
         })
     })
 </script>
+<!-- Intelliscense, won't include in main but different file? -->
+<script></script>
