@@ -1,5 +1,5 @@
 data:text/html,
-<title>NIMBUS WEB v1.0.1</title>
+<title>Nimbus Web | v1.0.1</title>
 
 <style>
     .l {
@@ -72,6 +72,7 @@ data:text/html,
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify.js"></script>
 
 <div class="l"></div>
 <pre>
@@ -79,11 +80,28 @@ data:text/html,
     </pre>
 <textarea class="c" placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false"
     autocomplete="off" autocapitalize="false"></textarea>
+<div class="cm"></div>
+<!-- Intelliscense, won't include in main but different file? -->
 <script>
-    const lang = prompt('What language are you coding in?').trim();
-    const h = document.querySelector(".h")
-    const e = document.querySelector(".c")
-    const l = document.querySelector(".l")
+    try {
+        function is(k) {
+            const st = setTimeout;
+            var lc = e.value.charAt(e.selectionStart);
+            switch (k) {
+                case "Enter":
+                    ins("     ")
+                    break
+            }
+        }
+    } catch (er) {
+        alert(er)
+    }
+</script>
+<script>
+    var lang = prompt('What language are you coding in?').trim();
+    var h = document.querySelector(".h")
+    var e = document.querySelector(".c")
+    var l = document.querySelector(".l")
     var wl
 
     e.addEventListener("scroll", (a) => {
@@ -130,7 +148,7 @@ data:text/html,
             var fn = prompt("file name? (with ext.)")
             if (!fn) return
             ae.download = fn
-            ae.href=URL.createObjectURL(new Blob([e.value], {type:'text/plain'}))
+            ae.href = URL.createObjectURL(new Blob([e.value], { type: 'text/plain' }))
             ae.click()
         }
         else if (a.ctrlKey && a.key == "s" || a.metaKey && a.key == "s") {
@@ -142,53 +160,63 @@ data:text/html,
         }
 
         switch (a.key) {
-                case "Tab":
-                    ins('    ')
-                    break
-                case "{":
-                    ins("}", a)
-                    break
-                case "[":
-                    ins("]", a)
-                    break
-                case "(":
-                    ins(")", a)
-                    break
-                case "\"":
-                    ins("\"", a)
-                    break
-                case "\'":
-                    ins("\'", a)
-                    break
-                case "\`":
-                    ins("\`", a)
-                case ")":
-                    inb(")",a)
-                    break
-                case "}":
-                    inb("}",a)
-                    break
-                case "]":
-                    inb("]", a)
-                    break
-                
-            }
-        
+            case "Tab":
+                ins('    ')
+                break
+            case "{":
+                ins("}", a)
+                break
+            case "[":
+                ins("]", a)
+                break
+            case "(":
+                ins(")", a)
+                break
+            case "\"":
+                ins("\"", a)
+                break
+            case "\'":
+                ins("\'", a)
+                break
+            case "\`":
+                ins("\`", a)
+            case ")":
+                inb(")", a)
+                break
+            case "}":
+                inb("}", a)
+                break
+            case "]":
+                inb("]", a)
+                break
+            case "~":
+                // intelisense
+                a.preventDefault();
+                try {
+                    e.value = js_beautify(e.value, { indent_size: 4 })
+                } catch (err) {
+                    alert("Failed to format...")
+                    console.error(err)
+                }
+
+        }
         setTimeout(() => {
             var ta = a.target
+            is(a.key)
 
-            h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value
-            const st = ta.scrollTop
-            l.scrollTop = st
-            h.scrollTop = st
-            h.scrollLeft = ta.scrollLeft
+            setTimeout(() => {
+                h.innerHTML = hljs.highlight(ta.value, { language: lang }).value || ta.value
+                const st = ta.scrollTop
+                l.scrollTop = st
+                h.scrollTop = st
+                h.scrollLeft = ta.scrollLeft
 
-            let ld = ""
-            let ln = ta.value.split("\n").length
-            for (let i = 0; i < ln; i++) { ld += `${i + 1}<br>` }
-            l.innerHTML = ld
+                let ld = ""
+                let ln = ta.value.split("\n").length
+                for (let i = 0; i < ln; i++) { ld += `${i + 1}<br>` }
+                l.innerHTML = ld
+            })
+
         })
     })
 </script>
-<!-- Intelliscense, won't include in main but different file? -->
-<script></script>
