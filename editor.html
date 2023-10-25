@@ -78,8 +78,7 @@ data:text/html,
 <pre>
         <div class="h"></div>
     </pre>
-<textarea class="c" placeholder="CTRL/META+S: OPEN PAGE OUTPUT | CTRL/META+D: SAVE AS FILE" autofocus spellcheck="false"
-    autocomplete="off" autocapitalize="false"></textarea>
+<textarea class="c" autofocus spellcheck="false" autocomplete="off" autocapitalize="false"></textarea>
 <div class="cm"></div>
 <!-- Intelliscense, won't include in main but different file? -->
 <script>
@@ -98,11 +97,13 @@ data:text/html,
     }
 </script>
 <script>
-    var lang = prompt('What language are you coding in?').trim();
+    var lang = prompt('What language are you coding in?').trim()
     var h = document.querySelector(".h")
     var e = document.querySelector(".c")
     var l = document.querySelector(".l")
     var wl
+
+    navigator.platform.toString().toLowerCase().includes('mac') ? e.placeholder = 'META+S: OPEN PAGE OUTPUT | META+D: SAVE AS FILE' : e.placeholder = 'CTRL+S: OPEN PAGE OUTPUT | CTRL+D: SAVE AS FILE'
 
     e.addEventListener("scroll", (a) => {
         const st = a.target.scrollTop
@@ -142,22 +143,23 @@ data:text/html,
         if (a.key == "Tab") a.preventDefault()
 
         try {
-        if (a.ctrlKey && a.key == "d" || a.metaKey && a.key == "d") {
-            a.preventDefault();
-            const ae = document.createElement("a")
-            var fn = prompt("file name? (with ext.)")
-            if (!fn) return
-            ae.download = fn
-            ae.href = URL.createObjectURL(new Blob([e.value], { type: 'text/plain' }))
-            ae.click()
-        } 
-        else if (a.ctrlKey && a.key == "s" || a.metaKey && a.key == "s") {
-            a.preventDefault()
-            if (wl) wl.close()
-            const w = window.open()
-            w.document.write(e.value)
-            wl = w
-        } } catch (err) { alert(err) }
+            if (a.ctrlKey && a.key == "d" || a.metaKey && a.key == "d") {
+                a.preventDefault();
+                const ae = document.createElement("a")
+                var fn = prompt("file name? (with ext.)")
+                if (!fn) return
+                ae.download = fn
+                ae.href = URL.createObjectURL(new Blob([e.value], { type: 'text/plain' }))
+                ae.click()
+            }
+            else if (a.ctrlKey && a.key == "s" || a.metaKey && a.key == "s") {
+                a.preventDefault()
+                if (wl) wl.close()
+                const w = window.open()
+                w.document.write(e.value)
+                wl = w
+            }
+        } catch (err) { alert(err) }
 
         switch (a.key) {
             case "Tab":
