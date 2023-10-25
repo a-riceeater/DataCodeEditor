@@ -117,10 +117,27 @@ data:text/html,
     try {
         function is(k) {
             const st = setTimeout;
-            var lc = e.value.charAt(e.selectionStart);
+            var lc = e.value.charAt(e.selectionStart - 2);
+            var t = e.value;
+            var sp = e.selectionStart;
+
+            let start = t.lastIndexOf(' ', sp - 1) + 1;
+            let end = t.indexOf(' ', sp);
+
+            if (end === -1) {
+                end = t.length;
+            }
+
+            const word = t.substring(start, end);
             switch (k) {
                 case "Enter":
-                    ins("     ")
+                    if (lc == "{") {
+                        ins("\n")
+                        ins("    ")
+                    }
+                    if (lc == ":" && lang == "py" || lang == "python") {
+                        ins("    ")
+                    }
                     break
             }
         }
