@@ -11,7 +11,7 @@ A: Hex values require a `#`. However, in URLS, `#` signifies an HTML element, wh
 Simply paste the code into your browser tab!
 
 **Tiniest version** (no inline)
-```html
+`html
 data:text/html,
 <title>NIMBUS WEB v0.1.2</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/styles.css">
@@ -20,10 +20,10 @@ data:text/html,
 <div class="l"></div>
 <pre><div class="h"></div></pre>
 <textarea class="c" placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false" autocomplete="off" autocapitalize="false"></textarea>
-<script src="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/script.js"></script>```
+<script src="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/script.js"></script>`
 
 **Mini version** (inline)
-```html
+`html
 data:text/html,
 <title>NIMBUS WEB v0.1.2</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
@@ -34,4 +34,4 @@ data:text/html,
 <div class="l"></div>
 <pre><div class="h"></div></pre>
 <textarea class="c" placeholder="CTRL+S: OPEN PAGE OUTPUT | CTRL+SHIFT+S: SAVE AS FILE" autofocus spellcheck="false" autocomplete="off" autocapitalize="false"></textarea>
-<script>var wl;const lang=prompt("What language are you coding in?").trim(),h=document.querySelector(".h"),e=document.querySelector(".c"),l=document.querySelector(".l");h.addEventListener("scroll",t=>{let r=t.target.scrollTop;e.scrollTop=r,l.scrollTop=r,e.scrollLeft=t.target.scrollLeft}),e.addEventListener("scroll",t=>{let r=t.target.scrollTop;h.scrollTop=r,l.scrollTop=r,h.scrollLeft=t.target.scrollLeft}),l.addEventListener("scroll",t=>{let r=t.target.scrollTop;h.scrollTop=r,e.scrollTop=r});const ins=t=>{let r=e.selectionStart,s=e.selectionEnd;e.value=e.value.substring(0,r)+t+e.value.substring(s),e.selectionStart=e.selectionEnd=r+t.length-1,e.focus()};e.addEventListener("keydown",t=>{if("Tab"==t.key&&t.preventDefault(),t.ctrlKey||t.metaKey&&t.shiftKey&&"s"==t.key){let r=document.createElement("a");r.download=prompt("file name? (with ext.)"),r.href=URL.createObjectURL(new Blob([e.value],{type:"text/plain"})),r.click()}else if(t.ctrlKey||t.metaKey&&"s"==t.key){t.preventDefault(),wl&&wl.close();let s=window.open();s.document.write(e.value),wl=s}setTimeout(()=>{var r=t.target;switch(t.key){case"Tab":ins("    ");break;case"{":ins("}");break;case"[":ins("]");break;case"(":ins(")");break;case'"':ins('"');break;case"'":ins("'");break;case"`":ins("`")}h.innerHTML=hljs.highlight(r.value,{language:lang}).value||r.value;let s=r.scrollTop;l.scrollTop=s,h.scrollTop=s,h.scrollLeft=r.scrollLeft;let a="",o=r.value.split("\n").length;for(let c=0;c<o;c++)a+=`${c+1}<br>`;l.innerHTML=a})});</script>```
+<script>var wl;const lang=prompt("What language are you coding in?").trim(),h=document.querySelector(".h"),e=document.querySelector(".c"),l=document.querySelector(".l");h.addEventListener("scroll",t=>{let r=t.target.scrollTop;e.scrollTop=r,l.scrollTop=r,e.scrollLeft=t.target.scrollLeft}),e.addEventListener("scroll",t=>{let r=t.target.scrollTop;h.scrollTop=r,l.scrollTop=r,h.scrollLeft=t.target.scrollLeft}),l.addEventListener("scroll",t=>{let r=t.target.scrollTop;h.scrollTop=r,e.scrollTop=r});const ins=t=>{let r=e.selectionStart,s=e.selectionEnd;e.value=e.value.substring(0,r)+t+e.value.substring(s),e.selectionStart=e.selectionEnd=r+t.length-1,e.focus()};e.addEventListener("keydown",t=>{if("Tab"==t.key&&t.preventDefault(),t.ctrlKey||t.metaKey&&t.shiftKey&&"s"==t.key){let r=document.createElement("a");r.download=prompt("file name? (with ext.)"),r.href=URL.createObjectURL(new Blob([e.value],{type:"text/plain"})),r.click()}else if(t.ctrlKey||t.metaKey&&"s"==t.key){t.preventDefault(),wl&&wl.close();let s=window.open();s.document.write(e.value),wl=s}setTimeout(()=>{var r=t.target;switch(t.key){case"Tab":ins("    ");break;case"{":ins("}");break;case"[":ins("]");break;case"(":ins(")");break;case'"':ins('"');break;case"'":ins("'");break;case"`":ins("`")}h.innerHTML=hljs.highlight(r.value,{language:lang}).value||r.value;let s=r.scrollTop;l.scrollTop=s,h.scrollTop=s,h.scrollLeft=r.scrollLeft;let a="",o=r.value.split("\n").length;for(let c=0;c<o;c++)a+=`${c+1}<br>`;l.innerHTML=a})});</script>`
