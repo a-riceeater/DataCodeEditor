@@ -18,7 +18,7 @@ data:text/html,
         overflow-y: scroll;
         cursor: default;
         font-family: Menlo, Monaco, 'Courier New', monospace;
-        border-right: 1px solid lightgray;
+        border-right: 1px solid lightgray;   
     }
 
     .l::-webkit-scrollbar {
@@ -44,6 +44,8 @@ data:text/html,
         padding-left: 5px;
         z-index: 3;
         caret-color: lightgray;
+        padding-bottom: 8px;
+        box-sizing: border-box;  
     }
 
     .c::selection {
@@ -68,6 +70,8 @@ data:text/html,
         padding-left: 5px;
         z-index: 2;
         overflow-y: scroll;
+        padding-bottom: 8px;
+        box-sizing: border-box;       
     }
 
     .cm {
@@ -210,6 +214,19 @@ data:text/html,
             u: 0
         },
         {
+            s: "let",
+            u: 0
+        },
+        {
+            s: "location",
+            u: 0
+        },
+        {
+            s: "length",
+            u: 0
+        },
+        
+        {
             s: "Math",
             u: 0
         },
@@ -293,12 +310,19 @@ data:text/html,
             }*/
 
             var sugs = [];
+            var inx = [];
+            let top = [];
             for (let i = 0; i < suggestions.length; i++) {
                 if (suggestions[i].s.toLocaleLowerCase().startsWith(word.toLowerCase())) {
                     sugs.push(suggestions[i])
                 }
             }
-            console.log(sugs)
+            
+            for (let i = 0; i < sugs.length; i++) {
+                
+            }
+
+            function getLargest(r){for(var t,e=r[0],n=0;n<r.length;n++)e<=r[n]&&(e=r[n],t=n);return t}
         }
     } catch (er) {
         alert(er)
@@ -378,6 +402,7 @@ data:text/html,
         try {
             e.value = js_beautify(e.value, { indent_size: 4 })
             hl()
+            cm.style.display = "none"
         } catch (err) {
             alert("Failed to format...")
             console.error(err)
