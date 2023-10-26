@@ -175,7 +175,7 @@ data:text/html,
             return await fh.getFile()
         } catch (err) {
             console.error(err)
-            if (!err.toString().includes("aborted")) alert("User must do an input (keypress/click) before opening dialog.")
+            if (!err.toString().includes("aborted")) alert("User must do an input (keypress/click) before opening dialog, or File API not supported.")
         }
     }
 
