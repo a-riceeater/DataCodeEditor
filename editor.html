@@ -18,7 +18,7 @@ data:text/html,
         overflow-y: scroll;
         cursor: default;
         font-family: Menlo, Monaco, 'Courier New', monospace;
-        border-right: 1px solid lightgray;   
+        border-right: 1px solid lightgray;
     }
 
     .l::-webkit-scrollbar {
@@ -45,7 +45,7 @@ data:text/html,
         z-index: 3;
         caret-color: lightgray;
         padding-bottom: 8px;
-        box-sizing: border-box;  
+        box-sizing: border-box;
     }
 
     .c::selection {
@@ -71,7 +71,7 @@ data:text/html,
         z-index: 2;
         overflow-y: scroll;
         padding-bottom: 8px;
-        box-sizing: border-box;       
+        box-sizing: border-box;
     }
 
     .cm {
@@ -119,7 +119,7 @@ data:text/html,
 <!-- Intelliscense, won't include in main but different file? -->
 
 <script>
-    
+    var intSug;
     const suggestions = [
         {
             s: "addEventListener",
@@ -225,7 +225,7 @@ data:text/html,
             s: "length",
             u: 0
         },
-        
+
         {
             s: "Math",
             u: 0
@@ -276,6 +276,9 @@ data:text/html,
         }
     ];
 
+    const insertAt = (original, toInsert, index) => original.slice(0, index) + toInsert + original.slice(index);
+    //function getLargest(r){for(var t,e=r[0],n=0;n<r.length;n++)e<=r[n]&&(e=r[n],t=n);return t}
+    const getLargest = r => r.reduce((t, e, n) => e >= r[t] ? n : t, 0);
 
     try {
         function is(k) {
@@ -304,15 +307,15 @@ data:text/html,
                     break
             }
 
-           /* const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
-            if (sug) {
-                console.log(sug)
-            }*/
+            /* const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
+             if (sug) {
+                 console.log(sug)
+             }*/
 
             var sugs = [];
             var inx = [];
             let top = [];
-            for (let i = 0; i < suggestions.length; i++) {
+            /*for (let i = 0; i < suggestions.length; i++) {
                 if (suggestions[i].s.toLocaleLowerCase().startsWith(word.toLowerCase())) {
                     sugs.push(suggestions[i])
                 }
@@ -320,9 +323,11 @@ data:text/html,
             
             for (let i = 0; i < sugs.length; i++) {
                 
-            }
+            }*/
 
-            function getLargest(r){for(var t,e=r[0],n=0;n<r.length;n++)e<=r[n]&&(e=r[n],t=n);return t}
+            intSug = "" //.replace(word, "")
+            hl();
+
         }
     } catch (er) {
         alert(er)
@@ -396,7 +401,13 @@ data:text/html,
         a.preventDefault()
     }
 
-    const hl = () => h.innerHTML = hljs.highlight(e.value, { language: lang }).value || e.value
+    const hl = () => {
+        var rs;
+        if (intSug) {
+            rs = insertAt(e.value, "suggestion", e.selectionStart)
+        }
+        h.innerHTML = hljs.highlight(rs || e.value, { language: lang }).value || (rs || e.value)
+    }
 
     const fd = () => {
         try {
@@ -491,6 +502,7 @@ data:text/html,
             is(a.key)
 
             setTimeout(() => {
+
                 hl()
                 const st = e.scrollTop
                 l.scrollTop = st
