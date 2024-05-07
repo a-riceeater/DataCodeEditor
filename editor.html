@@ -1,13 +1,13 @@
 data:text/html,
-<title>Nimbus Web | v1.0.1</title>
+<title>Nimbus Web | v1.0.2</title>
 
 <style>
     .l {
         position: fixed;
         left: 0;
-        top: 0;
+        top: 40px;
         width: 30px;
-        height: 100%;
+        height: calc(100% - 40px);
         background-color: rgb(40, 44, 52);
         color: white;
         text-align: center;
@@ -30,13 +30,13 @@ data:text/html,
     .c {
         font-family: Menlo, Monaco, 'Courier New', monospace;
         width: calc(100% - 30px);
-        height: 100%;
+        height: calc(100% - 40px);
         position: fixed;
         left: 30px;
-        top: 0;
+        top: 40px;
         outline: 0;
         font-size: 14px;
-        padding-top: 2.5px;
+        padding-top: 4.5px;
         box-sizing: border-box;
         line-height: 1em;
         background-color: transparent;
@@ -57,13 +57,13 @@ data:text/html,
     .h {
         font-family: Menlo, Monaco, 'Courier New', monospace;
         width: calc(100% - 30px);
-        height: 100%;
+        height: calc(100% - 40px);
         position: fixed;
         left: 30px;
-        top: -0;
+        top: 40px;
         outline: 0;
         font-size: 14px;
-        padding-top: 2.5px;
+        padding-top: 4.5px;
         box-sizing: border-box;
         line-height: 1em;
         background-color: rgb(40, 44, 52);
@@ -106,11 +106,54 @@ data:text/html,
     .cm>div:hover {
         background-color: rgb(47, 114, 229);
     }
+
+    .t {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: rgb(40, 44, 52);
+        border-bottom: 1px solid lightgray;
+        z-index: 4;
+    }
+
+    .tab {
+        height: 100%;
+        float: left;
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-right: 1px solid lightgray;
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        font-size: 14px;
+        cursor: pointer;
+        color: lightgray;
+    }
+
+    .tc {
+        margin-left: 5px;
+        font-size: 16px;
+        color: lightgray;
+        transition: .25s;
+    }
+    
+    .tc:hover {
+        color: red;
+    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.9/beautify.js"></script>
 
+<div class="t">
+    <div class="tab">
+        <span class="tn">editor.html</span>
+        <span class="tc">x</span>
+    </div>
+</div>
 <div class="l"></div>
 <pre>
         <div class="h"></div>
@@ -376,6 +419,7 @@ data:text/html,
         l.scrollTop = st
         h.scrollLeft = a.target.scrollLeft
     })
+
     l.addEventListener("scroll", (a) => {
         const st = a.target.scrollTop
         h.scrollTop = st
@@ -462,6 +506,7 @@ data:text/html,
                 lang = /(?:\.([^.]+))?$/.exec(f.name)[1];
                 e.value = await f.text()
                 setTimeout(hl);
+                document.title = `${f.name} - Nimbus Web`
             }
         } catch (err) { alert(err) }
 
@@ -526,9 +571,11 @@ data:text/html,
         cm.style.left = ev.clientX;
         cm.style.display = "flex"
     })
+    
     e.addEventListener("click", (ev) => {
         cm.style.display = "none"
     })
+
     d(".fm").addEventListener("click", fd)
     String.prototype.replaceAt = function (index, replacement) {
         return this.substring(0, index) + replacement + this.substring(index + replacement.length);
