@@ -7,6 +7,10 @@ Q: Why is there no hex values? Wouldn't that increase URL length?
 
 A: Hex values require a `#`. However, in URLS, `#` signifies an HTML element, which would cutoff all of the code after the `#`
 
+Q: Why isn't File API supported in inline versions?
+
+A: File API is not supported in insecure browsers `(data:text/html)`
+
 ## Usage
 
 Simply paste the code into your browser tab!
@@ -60,7 +64,7 @@ data:text/html,
 <script>var wl;const lang=prompt("What language are you coding in?").trim(),h=document.querySelector(".h"),e=document.querySelector(".c"),l=document.querySelector(".l");e.addEventListener("scroll",t=>{let a=t.target.scrollTop;h.scrollTop=a,l.scrollTop=a,h.scrollLeft=t.target.scrollLeft}),l.addEventListener("scroll",t=>{let a=t.target.scrollTop;h.scrollTop=a,e.scrollTop=a});const ins=(t,a)=>{let r=e.selectionStart,n=e.selectionEnd;if(e.value.charAt(r)==t){e.setSelectionRange(r+1,r+1),a.preventDefault();return}e.value=e.value.substring(0,r)+t+e.value.substring(n),e.selectionStart=e.selectionEnd=r+t.length-1,e.focus()},inb=(t,a)=>{var r=e.selectionStart;e.value.charAt(r)==t&&(e.setSelectionRange(r+1,r+1),a.preventDefault())};e.addEventListener("keydown",t=>{if("Tab"==t.key&&t.preventDefault(),t.ctrlKey&&t.shiftKey&&"s"==t.key||t.metaKey&&t.shiftKey&&"s"==t.key){alert("dow");let a=document.createElement("a");var r=prompt("file name? (with ext.)");if(!r)return;a.download=r,a.href=URL.createObjectURL(new Blob([e.value],{type:"text/plain"})),a.click()}else if(t.ctrlKey&&"s"==t.key||t.metaKey&&"s"==t.key){t.preventDefault(),wl&&wl.close();let n=window.open();n.document.write(e.value),wl=n}switch(t.key){case"Tab":ins("    ");break;case"{":ins("}",t);break;case"[":ins("]",t);break;case"(":ins(")",t);break;case'"':ins('"',t);break;case"'":ins("'",t);break;case"`":ins("`",t);case")":inb(")",t);break;case"}":inb("}",t);break;case"]":inb("]",t)}setTimeout(()=>{var a=t.target;h.innerHTML=hljs.highlight(a.value,{language:lang}).value||a.value;let r=a.scrollTop;l.scrollTop=r,h.scrollTop=r,h.scrollLeft=a.scrollLeft;let n="",s=a.value.split("\n").length;for(let c=0;c<s;c++)n+=`${c+1}<br>`;l.innerHTML=n})});</script>
 ```
 
-**Downloaded Version**
+**Downloaded Version (Download `editor.html` and open in your browser)**
 
 - No inline code
 - Faster load
