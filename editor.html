@@ -358,10 +358,15 @@ data:text/html,
                     break
             }
 
-            /* const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
+            const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
              if (sug) {
                  console.log(sug)
-             }*/
+                 alert(JSON.stringify(getCursorPos(document.querySelector(".c"))));
+
+             }
+
+             
+
 
             var sugs = [];
             var inx = [];
@@ -383,6 +388,36 @@ data:text/html,
     } catch (er) {
         alert(er)
     }
+
+    function getCursorPos(input) {
+    if ("selectionStart" in input && document.activeElement == input) {
+        return {
+            start: input.selectionStart,
+            end: input.selectionEnd
+        };
+    }
+    else if (input.createTextRange) {
+        var sel = document.selection.createRange();
+        if (sel.parentElement() === input) {
+            var rng = input.createTextRange();
+            rng.moveToBookmark(sel.getBookmark());
+            for (var len = 0;
+                     rng.compareEndPoints("EndToStart", rng) > 0;
+                     rng.moveEnd("character", -1)) {
+                len++;
+            }
+            rng.setEndPoint("StartToStart", input.createTextRange());
+            for (var pos = { start: 0, end: len };
+                     rng.compareEndPoints("EndToStart", rng) > 0;
+                     rng.moveEnd("character", -1)) {
+                pos.start++;
+                pos.end++;
+            }
+            return pos;
+        }
+    }
+    return -1;
+}
 </script>
 <script>
     const d = (q) => document.querySelector(q)
@@ -478,7 +513,7 @@ data:text/html,
         if (a.key == "Tab") a.preventDefault()
         hl()
 
-        if (a.key == " ") currentWord = "";
+        if (a.key == " " || a.key == "Enter") currentWord = "";
         else if (a.key.toString().length == 1) currentWord += a.key
 
         try {
