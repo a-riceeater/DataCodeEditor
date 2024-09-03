@@ -149,6 +149,26 @@ data:text/html,
     .tc:hover {
         color: red;
     }
+
+    .isp {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        width: 250px;
+        height: 150px;
+        font-family: Menlo, Monaco, 'Courier New', monospace;
+        background-color: rgb(43, 48, 58);
+        z-index: 11;
+        color: white;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        padding-left: 15px;
+        box-sizing: border-box;
+    }
+
+    .isp-de {
+        font-size: 12px;
+        margin-top: -10px;
+    }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/a-riceeater/DataCodeEditor@latest/atom.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -166,6 +186,11 @@ data:text/html,
 <textarea class="c" autofocus spellcheck="false" autocomplete="off" autocapitalize="false"></textarea>
 <div class="cm">
     <div class="fm">Format Document</div>
+</div>
+<div class="isp">
+    <p>Intelliscense</p>
+    <p class="isp-de">Press tab to accept</p>
+    
 </div>
 <!-- Intelliscense, won't include in main but different file? -->
 
@@ -361,7 +386,6 @@ data:text/html,
             const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
              if (sug) {
                  console.log(sug)
-                 alert(JSON.stringify(getCursorPos(document.querySelector(".c"))));
 
              }
 
