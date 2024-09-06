@@ -387,11 +387,11 @@ data:text/html,
                     break
             }
 
-            const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
+            const sug = suggestions.find(s => s.s.toLowerCase().startsWith(currentWord.toLowerCase()));
              if (sug) {
                  console.log(sug)
-                 intSug = sug.s
-                 document.querySelector(".isp-sug").innerHTML = `<b>${word}</b>` + sug.s.replace(word, "");
+                 intSug = sug.s.replace(currentWord, "")
+                 document.querySelector(".isp-sug").innerHTML = `<b>${currentWord}</b>` + sug.s.replace(currentWord, "");
              } else document.querySelector(".isp-sug").innerHTML = "";
 
              
@@ -522,7 +522,7 @@ data:text/html,
     const hl = () => {
         var rs;
         if (intSug) {
-            rs = insertAt(e.value, intSug, e.selectionStart)
+            //rs = insertAt(e.value, intSug, e.selectionStart)
         }
         h.innerHTML = hljs.highlight(rs || e.value, { language: lang }).value || (rs || e.value)
     }
@@ -543,6 +543,7 @@ data:text/html,
         hl()
 
         if (a.key == " " || a.key == "Enter") currentWord = "";
+        else if (a.key == "Backspace") currentWord = currentWord.slice(0, -1)
         else if (a.key.toString().length == 1) currentWord += a.key
 
         try {
@@ -614,9 +615,11 @@ data:text/html,
 
         switch (a.key) {
             case "Tab":
-                alert(intSug)
                 if (intSug) {
-                    alert("sug")
+                    var add = intSug.replace(currentWord, "");
+                    document.querySelector(".c").value = insertAt(e.value, intSug, e.selectionStart)
+                    intSug = ""
+                    currentWord = ""
                 }
                 else ins('    ')
                 break
