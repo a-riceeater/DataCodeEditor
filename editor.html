@@ -390,6 +390,7 @@ data:text/html,
             const sug = suggestions.find(s => s.s.toLowerCase().startsWith(word.toLowerCase()));
              if (sug) {
                  console.log(sug)
+                 intSug = sug.s
                  document.querySelector(".isp-sug").innerHTML = `<b>${word}</b>` + sug.s.replace(word, "");
              } else document.querySelector(".isp-sug").innerHTML = "";
 
@@ -409,7 +410,7 @@ data:text/html,
                 
             }*/
 
-            intSug = "" //.replace(word, "")
+            //intSug = "" //.replace(word, "")
             hl();
 
         }
@@ -521,7 +522,7 @@ data:text/html,
     const hl = () => {
         var rs;
         if (intSug) {
-            rs = insertAt(e.value, "suggestion", e.selectionStart)
+            rs = insertAt(e.value, intSug, e.selectionStart)
         }
         h.innerHTML = hljs.highlight(rs || e.value, { language: lang }).value || (rs || e.value)
     }
@@ -613,7 +614,11 @@ data:text/html,
 
         switch (a.key) {
             case "Tab":
-                ins('    ')
+                alert(intSug)
+                if (intSug) {
+                    alert("sug")
+                }
+                else ins('    ')
                 break
             case "{":
                 ins("}", a)
